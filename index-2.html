@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Damini Mishra Portfolio</title>
+<meta name="description" content="Damini Mishra — education data analyst and K–12 STEM educator. Python, SQL, Power BI, and classroom experience.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,600&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single reading column like a student progress report — a header block, a "report card" of results, then sections separated by thin rules. */
+:root {
+  --bg: #F5F7F6;
+  --surface: #FFFFFF;
+  --ink: #15302A;
+  --muted: #56665F;
+  --line: #D6DFDB;
+  --accent: #B9761A;
+  --accent-soft: #F6E9D3;
+  --green: #2E6A5B;
+  --green-soft: #E2EEEA;
+  --display: "Literata", Georgia, "Times New Roman", serif;
+  --body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F1917; --surface: #15221F; --ink: #E4ECE9; --muted: #9AABA5; --line: #2A3A36;
+    --accent: #E9B35A; --accent-soft: #3A2E1A; --green: #7FC2AF; --green-soft: #1C2F2A;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F1917; --surface: #15221F; --ink: #E4ECE9; --muted: #9AABA5; --line: #2A3A36;
+  --accent: #E9B35A; --accent-soft: #3A2E1A; --green: #7FC2AF; --green-soft: #1C2F2A;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 1rem; line-height: 1.6; margin: 0; }
+a { color: var(--green); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 860px; margin: 0 auto; padding-inline: 20px; }
+
+header.top { border-bottom: 1px solid var(--line); background: var(--bg); position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; }
+header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; flex-wrap: wrap; }
+.mark { font-family: var(--display); font-weight: 600; font-size: 1.05rem; text-decoration: none; color: var(--ink); }
+nav { display: flex; gap: 18px; flex-wrap: wrap; font-size: .9rem; }
+nav a { color: var(--muted); text-decoration: none; }
+nav a:hover { color: var(--ink); }
+
+.hero { padding-block: 64px 40px; }
+.eyebrow { font-family: var(--mono); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--green); margin: 0 0 14px; }
+h1 { font-family: var(--display); font-weight: 600; font-size: clamp(2.3rem, 6vw, 3.6rem); line-height: 1.08; margin: 0 0 18px; text-wrap: balance; letter-spacing: -.01em; }
+h1 em { font-style: italic; color: var(--accent); font-weight: 500; }
+.lede { font-size: 1.15rem; color: var(--muted); max-width: 60ch; margin: 0 0 28px; }
+.actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 6px; font: 500 .95rem var(--body); text-decoration: none; border: 1px solid var(--ink); cursor: pointer; }
+.btn.primary { background: var(--ink); color: var(--bg); }
+.btn.ghost { background: transparent; color: var(--ink); }
+.btn:hover { opacity: .88; }
+
+/* Report card of results */
+.report { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; margin-block: 8px 24px; overflow: hidden; }
+.report-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 20px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.report-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.metric { padding: 20px; border-right: 1px solid var(--line); min-width: 0; }
+.metric:last-child { border-right: 0; }
+.metric .val { font-family: var(--display); font-size: 2rem; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; color: var(--ink); }
+.metric .val small { color: var(--accent); font-size: 1.2rem; }
+.metric p { margin: 10px 0 0; font-size: .86rem; color: var(--muted); line-height: 1.45; }
+@media (max-width: 720px) {
+  .report-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .metric:nth-child(2) { border-right: 0; }
+  .metric:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+}
+
+section.block { padding-block: 48px; border-top: 1px solid var(--line); }
+h2 { font-family: var(--display); font-weight: 600; font-size: 1.7rem; margin: 0 0 8px; text-wrap: balance; }
+.sub { color: var(--muted); margin: 0 0 28px; max-width: 62ch; }
+.prose p { max-width: 65ch; margin: 0 0 14px; }
+
+/* Projects */
+.projects { display: grid; gap: 16px; }
+.project { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 22px; display: grid; gap: 10px; }
+.project-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.project h3 { font-family: var(--display); font-weight: 600; font-size: 1.2rem; margin: 0; min-width: 0; }
+.status { font-family: var(--mono); font-size: .72rem; letter-spacing: .05em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
+.status.case { background: var(--green-soft); color: var(--green); }
+.status.wip { background: var(--accent-soft); color: var(--accent); }
+.project p { margin: 0; color: var(--muted); max-width: 68ch; }
+.qa { display: grid; grid-template-columns: 7.5rem 1fr; gap: 4px 14px; font-size: .92rem; margin: 4px 0 0; }
+.qa dt { font-family: var(--mono); font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); padding-top: 3px; }
+.qa dd { margin: 0; min-width: 0; }
+@media (max-width: 520px) { .qa { grid-template-columns: 1fr; } .qa dd { margin-bottom: 8px; } }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font-family: var(--mono); font-size: .75rem; border: 1px solid var(--line); border-radius: 4px; padding: 2px 8px; color: var(--ink); }
+
+/* Experience */
+.role { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 24px; padding-block: 18px; border-bottom: 1px dashed var(--line); }
+.role:last-child { border-bottom: 0; }
+.when { font-family: var(--mono); font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 4px; }
+.role h3 { font-size: 1.05rem; font-weight: 600; margin: 0; }
+.role .org { color: var(--green); font-weight: 500; margin: 0 0 8px; }
+.role ul { margin: 0; padding-left: 1.1rem; max-width: 64ch; }
+.role li { margin-bottom: 6px; }
+.role > div { min-width: 0; }
+@media (max-width: 620px) { .role { grid-template-columns: 1fr; } }
+
+/* Skills + education */
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+@media (max-width: 620px) { .two { grid-template-columns: 1fr; } }
+h3.label { font-family: var(--mono); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 500; margin: 0 0 12px; }
+.edu { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+.edu strong { display: block; }
+.edu span { color: var(--muted); font-size: .92rem; }
+
+/* Contact */
+.contact { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.email { font-family: var(--mono); font-size: .95rem; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 10px 14px; user-select: all; overflow-wrap: anywhere; }
+footer { padding-block: 28px 48px; color: var(--muted); font-size: .85rem; border-top: 1px solid var(--line); }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top">Damini Mishra</a>
+    <nav aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap">
+    <section class="hero">
+      <p class="eyebrow">Education Data Analyst · K–12 STEM Educator</p>
+      <h1>I use data to help <em>students learn</em> and schools decide.</h1>
+      <p class="lede">I'm a former Teach For India Fellow and current K–12 substitute teacher in Washington, DC, with a master's in AI and Machine Learning. I turn attendance, assessment, and program data into clear findings that teachers and school leaders can act on.</p>
+      <div class="actions">
+        <a class="btn primary" href="#work">See my work</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/idaminimishra" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn ghost" href="https://github.com/idaminimishra" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </section>
+
+    <div class="report" aria-label="Results from classroom and program work">
+      <div class="report-head"><span>Results at a glance</span><span>Teach For India &amp; Transformational Schooling, 2024–25</span></div>
+      <div class="report-grid">
+        <div class="metric"><div class="val">+25<small>%</small></div><p>Overall academic performance for a 6th-grade class after data-informed interventions</p></div>
+        <div class="metric"><div class="val">+40<small>%</small></div><p>Outcomes for low-performing students after root-cause analysis of attendance and assessments</p></div>
+        <div class="metric"><div class="val">15+</div><p>Classrooms covered by a program impact evaluation</p></div>
+        <div class="metric"><div class="val">90<small>%</small></div><p>Data completeness in learning-outcome tracking systems I designed</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <section class="block" id="about">
+      <h2>About me</h2>
+      <div class="prose">
+        <p>I started in computer science, with a B.Tech in Computer Science and an M.Tech in Artificial Intelligence and Machine Learning. Then I moved into the classroom. As a Teach For India Fellow, I taught a 6th-grade class and built dashboards to see which students were falling behind and why.</p>
+        <p>That work showed me how much good data can change what happens in a classroom. Today I teach Mathematics and support students, including students with learning disabilities, across K–12 classrooms in Washington, DC. I'm building toward a role where I can do this analysis at the school and district level.</p>
+      </div>
+    </section>
+
+    <section class="block" id="work">
+      <h2>Selected work</h2>
+      <p class="sub">Analysis projects built on public education data, plus a case study from my classroom work at Teach For India. Code and full write-ups are on my GitHub.</p>
+      <div class="projects">
+        <article class="project">
+          <div class="project-top"><h3>Chronic absenteeism in DC public schools, 2024–25</h3><span class="status case">Analysis</span></div>
+          <dl class="qa">
+            <dt>Question</dt><dd>Which DC students and schools are most affected by chronic absenteeism, and which schools do better than expected for the students they serve?</dd>
+            <dt>What I did</dt><dd>Cleaned and analyzed OSSE's public school report card data for 229 schools in Python. Compared each school with its expected absenteeism rate, based on its share of economically disadvantaged students.</dd>
+            <dt>Findings</dt><dd>40% of DC students were chronically absent, rising from 34% in middle school to 55% in high school. Five high-poverty schools had rates 22 to 37 points below expected, which makes them models for other schools to learn from.</dd>
+          </dl>
+          <div class="tags"><span class="tag">Python</span><span class="tag">pandas</span><span class="tag">Matplotlib</span><span class="tag">Public data</span></div>
+          <div class="actions" style="margin-top:4px">
+            <a class="btn ghost" href="https://github.com/idaminimishra/dc-chronic-absenteeism" target="_blank" rel="noopener">View on GitHub</a>
+            <a class="btn ghost" href="https://colab.research.google.com/github/idaminimishra/dc-chronic-absenteeism/blob/main/dc_chronic_absenteeism.ipynb" target="_blank" rel="noopener">Run the notebook</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-top"><h3>Data-informed intervention for a 6th-grade class</h3><span class="status case">Case study</span></div>
+          <dl class="qa">
+            <dt>Problem</dt><dd>Students had wide gaps in literacy and numeracy, and there was no simple way to see who needed what support.</dd>
+            <dt>What I did</dt><dd>Built progress dashboards in Google Sheets, ran root-cause analysis on attendance and assessment data, and designed targeted interventions for each group of students.</dd>
+            <dt>Result</dt><dd>Overall academic performance rose 25% over the year, and low-performing students improved 40%. I presented the results at the TFI Showcase.</dd>
+          </dl>
+          <div class="tags"><span class="tag">Google Sheets</span><span class="tag">Root-cause analysis</span><span class="tag">Instructional design</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="block" id="experience">
+      <h2>Experience</h2>
+      <div class="role">
+        <div class="when">Feb 2026 – Present</div>
+        <div>
+          <h3>Substitute Teacher &amp; Paraprofessional</h3>
+          <p class="org">Scoot Education · Washington, DC</p>
+          <ul>
+            <li>Teach Mathematics and support K–12 classrooms across grade levels in whole-class, small-group, and one-on-one settings.</li>
+            <li>Support students with learning disabilities through individualized help and classroom accommodations.</li>
+            <li>Work with lead teachers on lesson planning, preparation, and student support.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="role">
+        <div class="when">Jun 2024 – Jan 2025</div>
+        <div>
+          <h3>Teaching Fellow</h3>
+          <p class="org">Teach For India · New Delhi, India</p>
+          <ul>
+            <li>Designed data-informed literacy and numeracy interventions for a 6th-grade class, raising overall performance 25%.</li>
+            <li>Built Google Sheets dashboards to track progress, find gaps, and adjust instruction.</li>
+            <li>Led a community research project that shaped student engagement strategies.</li>
+            <li>As Curriculum Associate at Transformational Schooling, evaluated program impact across 15+ classrooms using Excel and Google Forms tracking systems, which helped raise student engagement 25%.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="skills">
+      <div class="two">
+        <div>
+          <h2>Skills</h2>
+          <h3 class="label">Data</h3>
+          <div class="tags" style="margin-bottom:20px"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Power BI</span><span class="tag">Excel (Advanced)</span><span class="tag">Google Sheets</span><span class="tag">Data analysis</span><span class="tag">Dashboards</span></div>
+          <h3 class="label">Teaching</h3>
+          <div class="tags"><span class="tag">K–12 instruction</span><span class="tag">Mathematics &amp; Science</span><span class="tag">Differentiated instruction</span><span class="tag">Formative assessment</span><span class="tag">Lesson planning</span><span class="tag">Small-group instruction</span></div>
+        </div>
+        <div>
+          <h2>Education</h2>
+          <ul class="edu">
+            <li><strong>M.Tech, Artificial Intelligence &amp; Machine Learning</strong><span>Khawaja Moinuddin Chishti University, India · 2022–2024</span></li>
+            <li><strong>B.Tech, Computer Science &amp; Engineering</strong><span>Manav Rachna University, Haryana, India · 2010–2014</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="contact">
+      <h2>Get in touch</h2>
+      <p class="sub">I'm open to education analyst, data analyst, and teaching roles in the Washington, DC area.</p>
+      <div class="contact">
+        <span class="email" id="email">daminimishra31@gmail.com</span>
+        <button class="btn ghost" id="copy" type="button">Copy email</button>
+        <a class="btn ghost" href="https://www.linkedin.com/in/idaminimishra" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn ghost" href="https://github.com/idaminimishra" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">Damini Mishra · Washington, DC</div>
+</footer>
+
+<script>
+document.getElementById('copy').addEventListener('click', function () {
+  var btn = this, text = document.getElementById('email').textContent;
+  function done(msg) { btn.textContent = msg; setTimeout(function () { btn.textContent = 'Copy email'; }, 1800); }
+  function fallback() {
+    var r = document.createRange(); r.selectNodeContents(document.getElementById('email'));
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); done('Selected');
+  }
+  try { navigator.clipboard.writeText(text).then(function () { done('Copied'); }, fallback); } catch (e) { fallback(); }
+});
+</script>
+</body>
+</html>
